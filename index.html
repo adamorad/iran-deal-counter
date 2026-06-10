@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>US-Iran Deal Counter</title>
+    <title>Trump vs Iran: Deal Counter</title>
     <style>
       :root {
         --bg: #0a0a0f;
@@ -285,10 +285,10 @@
   </head>
   <body>
     <header>
-      <h1>🇺🇸 vs 🇮🇷 &nbsp; Deal Counter</h1>
+      <h1>Trump vs Iran &nbsp; Deal Counter</h1>
       <p>
-        A timeline of every significant moment the United States and Iran were
-        close to a nuclear or diplomatic agreement — and what happened next.
+        Every time Trump was close to a deal with Iran — and why it didn't
+        happen. Covering both terms: 2017&ndash;2021 and 2025&ndash;present.
       </p>
     </header>
 
@@ -299,7 +299,7 @@
       </div>
       <div class="stat-card deals">
         <div class="number" id="cnt-deals">0</div>
-        <div class="label">Deals Reached</div>
+        <div class="label">Deals Signed</div>
       </div>
       <div class="stat-card failed">
         <div class="number" id="cnt-failed">0</div>
@@ -313,9 +313,7 @@
 
     <div class="filters">
       <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="deal">Deals Reached</button>
       <button class="filter-btn" data-filter="failed">Fell Through</button>
-      <button class="filter-btn" data-filter="partial">Partial</button>
       <button class="filter-btn" data-filter="ongoing">Ongoing</button>
     </div>
 
@@ -324,95 +322,67 @@
     <script>
       const events = [
         {
-          year: "2003",
-          title: "Iran's 'Grand Bargain' Proposal",
-          status: "failed",
-          desc: "Following the Iraq invasion, Iran sent a sweeping proposal via the Swiss embassy offering to discuss its nuclear program, support for Hezbollah, and recognition of Israel — in exchange for security guarantees and normalized relations.",
-          why: "The Bush administration refused to engage, reportedly dismissing it without review.",
-        },
-        {
-          year: "2003–2004",
-          title: "EU-3 Tehran Agreement",
-          status: "partial",
-          desc: "Iran signed the Additional Protocol and agreed to suspend uranium enrichment in talks with France, Germany, and the UK (with tacit US involvement). The first formal suspension since Iran's nuclear program began.",
-          why: "Iran resumed enrichment in 2005 after EU talks stalled over security guarantees.",
-        },
-        {
-          year: "2006–2008",
-          title: "P5+1 Incentives Package",
-          status: "failed",
-          desc: "The US joined the P5+1 group offering Iran a package of economic incentives to halt enrichment. The US agreed for the first time to participate in direct talks if Iran suspended first.",
-          why: "Iran rejected preconditions; talks never meaningfully began.",
-        },
-        {
-          year: "2009",
-          title: "Obama's Dual-Track Outreach",
-          status: "failed",
-          desc: "President Obama sent direct letters to Supreme Leader Khamenei and extended an open hand to Iran. The Geneva talks produced a brief framework (the Tehran Research Reactor deal) that fell apart within weeks.",
-          why: "Iran's disputed 2009 election and internal politics caused the proposal to collapse.",
-        },
-        {
-          year: "2012",
-          title: "Baghdad & Moscow Rounds",
-          status: "failed",
-          desc: "Multiple rounds of P5+1 talks in Istanbul, Baghdad, and Moscow. Negotiators came close on a limited agreement to cap 20% enrichment in exchange for partial sanctions relief.",
-          why: "Wide gaps on sanctions and the scope of Iran's enrichment rights caused a breakdown.",
-        },
-        {
-          year: "2013",
-          title: "Joint Plan of Action (Geneva)",
-          status: "deal",
-          desc: "Iran and P5+1 reached the first binding interim agreement: Iran capped enrichment at 5%, diluted its 20% stockpile, and halted construction at Arak. In return, ~$7B in limited sanctions relief.",
-          why: "First successful deal in decades. Served as a bridge to full JCPOA negotiations.",
-        },
-        {
-          year: "2014",
-          title: "JCPOA Extension — Near Miss",
-          status: "failed",
-          desc: "Negotiations for a comprehensive deal nearly concluded in November 2014 but missed the deadline. A 7-month extension was granted as talks were 'very close' on key technical issues.",
-          why: "Disputes over the number of centrifuges and pace of sanctions relief caused the delay.",
-        },
-        {
-          year: "2015",
-          title: "JCPOA Signed",
-          status: "deal",
-          desc: "The Joint Comprehensive Plan of Action was finalized in Vienna. Iran agreed to dramatic reductions in its nuclear program for 10–15 years in exchange for sweeping sanctions relief. Widely considered the most comprehensive nonproliferation deal in history.",
-          why: "Deal held — until US withdrawal in 2018.",
-        },
-        {
-          year: "2018",
+          year: "May 2018",
           title: "Trump Withdraws from JCPOA",
           status: "failed",
-          desc: "President Trump withdrew the US from the JCPOA and reimposed 'maximum pressure' sanctions. Iran remained in the deal for one year, then began systematically exceeding its limits.",
-          why: "No alternative deal was ever offered. Iran's nuclear program accelerated significantly.",
+          desc: "Trump pulled the US out of the 2015 nuclear deal and relaunched 'maximum pressure' sanctions, promising to negotiate a 'better deal' that would cover missiles, regional proxies, and a permanent end to enrichment.",
+          why: "No alternative framework was ever put on the table. Iran accelerated its nuclear program in response.",
         },
         {
-          year: "2019–2020",
-          title: "Secret Back-Channel Talks",
+          year: "June 2019",
+          title: "'No Preconditions' Meeting Offer",
           status: "failed",
-          desc: "Oman and Japan facilitated back-channel contacts between US and Iranian officials. Multiple reports of near-meetings between Trump and Rouhani at the UN General Assembly.",
-          why: "Killing of Gen. Soleimani in January 2020 ended any diplomatic opening.",
+          desc: "Trump repeatedly offered to meet Iranian President Rouhani with 'no preconditions' — at the G20, in New York, and publicly via Twitter. He said he was willing to talk 'anytime they want.'",
+          why: "Iran rejected the offer while US sanctions remained in place. Rouhani called it 'psychological warfare.'",
         },
         {
-          year: "2021–2022",
-          title: "Vienna JCPOA Restoration Talks",
+          year: "August 2019",
+          title: "Macron's G7 Back-Channel — Zarif Visit",
           status: "failed",
-          desc: "Biden administration entered indirect talks in Vienna to restore the JCPOA. Eight rounds of talks over 16 months. A final EU-drafted text was on the table in August 2022 with most issues resolved.",
-          why: "Iran demanded the IAEA close its probe into undeclared sites — a condition the US could not accept. Talks collapsed.",
+          desc: "French President Macron brought Iranian FM Javad Zarif to the G7 in Biarritz as a surprise guest and shuttled between Trump and Zarif trying to arrange a direct meeting. Trump said he was open to it.",
+          why: "Iran demanded sanctions be lifted first. No meeting happened. Trump later said Macron 'didn't have my approval.'",
         },
         {
-          year: "2023",
-          title: "Prisoner Swap & Funds Release",
-          status: "partial",
-          desc: "The US and Iran reached a limited deal: 5 Americans held in Iran were released in exchange for 5 Iranians held in the US, and $6B in frozen Iranian oil funds were released from South Korean accounts.",
-          why: "Not a nuclear deal — but the first major bilateral agreement since 2018 and a rare sign of functional diplomacy.",
+          year: "September 2019",
+          title: "UN General Assembly Near-Meeting",
+          status: "failed",
+          desc: "Trump and Rouhani were both at the UN in New York. Multiple officials described a potential meeting as 'very close.' Macron again mediated. Trump said he would meet 'under the right circumstances.'",
+          why: "Iran said it would only talk after sanctions relief. Bolton's firing days earlier added uncertainty. No meeting.",
         },
         {
-          year: "2025",
-          title: "Trump-Era Oman Channel",
+          year: "October 2019",
+          title: "Japan-Mediated Back-Channel",
+          status: "failed",
+          desc: "PM Shinzo Abe visited Tehran and Washington to carry messages between Trump and Khamenei. Abe delivered a personal letter from Trump to Khamenei proposing direct talks.",
+          why: "Khamenei publicly rejected the outreach, saying Iran had 'no trust' in Trump after the JCPOA withdrawal.",
+        },
+        {
+          year: "January 2020",
+          title: "Soleimani Killing — Diplomacy Ends",
+          status: "failed",
+          desc: "The US killed IRGC General Qasem Soleimani in a drone strike in Baghdad. Iran launched ballistic missiles at US bases in Iraq. Any remaining diplomatic track was immediately closed.",
+          why: "Both sides pulled back from direct conflict, but the killing ended any prospect of talks for the rest of Term 1.",
+        },
+        {
+          year: "March 2025",
+          title: "Oman Channel Opens — Term 2",
           status: "ongoing",
-          desc: "The Trump administration initiated indirect talks via Omani intermediaries, with reported direct US-Iranian contact. Multiple rounds held in Muscat through early 2026, focused on a limited nuclear freeze deal.",
-          why: "Status: active negotiations. No agreement yet, but described by both sides as 'serious.'",
+          desc: "Trump sent envoy Steve Witkoff to Oman for indirect talks with Iranian officials. Trump simultaneously threatened military action if Iran didn't negotiate, calling it a 'once-in-a-lifetime' opportunity for a deal.",
+          why: "First formal US-Iran diplomatic contact of Trump's second term. Ongoing.",
+        },
+        {
+          year: "April 2025",
+          title: "First Direct US-Iran Talks Since 2015",
+          status: "ongoing",
+          desc: "In an unprecedented move for a Trump administration, US and Iranian negotiators held direct face-to-face talks in Muscat, Oman. Described by both sides as 'constructive.' Witkoff led for the US; Iran sent senior nuclear negotiators.",
+          why: "No agreement reached. A second round was scheduled. Trump said a deal was 'possible.'",
+        },
+        {
+          year: "May–June 2025",
+          status: "ongoing",
+          title: "Multiple Rounds in Muscat",
+          desc: "Three additional rounds of direct and indirect talks held in Muscat and Rome. Discussions focused on a limited nuclear freeze: Iran caps enrichment at 60%, agrees to IAEA access; US provides partial sanctions relief.",
+          why: "Sticking points: Iran insists on keeping enrichment infrastructure; US wants zero enrichment on Iranian soil. No deal as of June 2026.",
         },
       ];
 
