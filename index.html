@@ -12,9 +12,7 @@
     />
     <style>
       :root {
-        --bg: #0a0a0f;
-        --surface: #13131a;
-        --border: #2a2a3a;
+        --bg: #07070e;
         --text: #e8e8f0;
         --muted: #7a7a9a;
         --green: #22c55e;
@@ -23,6 +21,9 @@
         --blue: #3b82f6;
         --accent: #6366f1;
         --orange: #f97316;
+        --glass-bg: rgba(255, 255, 255, 0.04);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-hover: rgba(255, 255, 255, 0.07);
       }
 
       * {
@@ -42,14 +43,32 @@
         background: var(--bg);
         color: var(--text);
         min-height: 100vh;
+        /* subtle background glow so glass has something to blur against */
+        background-image:
+          radial-gradient(
+            ellipse 60% 40% at 20% 10%,
+            rgba(99, 102, 241, 0.12) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 50% 35% at 80% 80%,
+            rgba(239, 68, 68, 0.08) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 30% at 60% 40%,
+            rgba(249, 115, 22, 0.06) 0%,
+            transparent 70%
+          );
       }
 
       /* ── header ── */
       header {
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--glass-border);
         padding: 2.5rem 1rem 2rem;
         text-align: center;
-        position: relative;
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(12px);
       }
 
       header h1 {
@@ -69,9 +88,9 @@
 
       .lang-toggle {
         display: inline-block;
-        margin-top: 1.4rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
+        margin-top: 1.1rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
         color: var(--muted);
         border-radius: 6px;
         padding: 0.35rem 1rem;
@@ -80,10 +99,11 @@
         cursor: pointer;
         transition: all 0.15s;
         font-family: inherit;
+        backdrop-filter: blur(8px);
       }
       .lang-toggle:hover {
-        background: var(--accent);
-        border-color: var(--accent);
+        background: rgba(99, 102, 241, 0.25);
+        border-color: rgba(99, 102, 241, 0.5);
         color: #fff;
       }
 
@@ -91,7 +111,7 @@
       .stats {
         display: flex;
         justify-content: center;
-        gap: 1.5rem;
+        gap: 1rem;
         flex-wrap: wrap;
         padding: 2rem 1rem;
         max-width: 900px;
@@ -99,14 +119,19 @@
       }
 
       .stat-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 12px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
         padding: 1.4rem 2rem;
         text-align: center;
-        min-width: 140px;
+        min-width: 130px;
         flex: 1;
         max-width: 200px;
+        backdrop-filter: blur(16px);
+        transition: background 0.2s;
+      }
+      .stat-card:hover {
+        background: var(--glass-hover);
       }
 
       .stat-card .number {
@@ -121,11 +146,10 @@
         color: var(--muted);
         line-height: 1.3;
       }
-
       html[lang="en"] .stat-card .label {
         text-transform: uppercase;
         letter-spacing: 0.07em;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
       }
 
       .stat-card.total .number {
@@ -151,22 +175,92 @@
       }
 
       .filter-btn {
-        background: var(--surface);
-        border: 1px solid var(--border);
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
         color: var(--muted);
-        border-radius: 6px;
-        padding: 0.4rem 0.9rem;
+        border-radius: 20px;
+        padding: 0.38rem 1rem;
         font-size: 0.82rem;
         cursor: pointer;
         transition: all 0.15s;
         font-family: inherit;
+        backdrop-filter: blur(8px);
       }
-
       .filter-btn:hover,
       .filter-btn.active {
-        background: var(--accent);
-        border-color: var(--accent);
-        color: #fff;
+        background: rgba(99, 102, 241, 0.2);
+        border-color: rgba(99, 102, 241, 0.5);
+        color: #c7c8ff;
+      }
+
+      /* ── trump counter ── */
+      .trump-counter {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 1rem 2.5rem;
+      }
+
+      .trump-counter-header {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .trump-big-number {
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .trump-counter-label strong {
+        display: block;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .trump-counter-label span {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .quote-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+      }
+
+      .quote-item {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 1rem 1.2rem;
+        border-inline-start: 3px solid var(--accent);
+        backdrop-filter: blur(16px);
+        transition: background 0.2s;
+      }
+      .quote-item:hover {
+        background: var(--glass-hover);
+      }
+
+      .quote-meta {
+        font-size: 0.73rem;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+      }
+      .quote-text {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: var(--text);
+        font-style: italic;
+      }
+      .quote-outcome {
+        margin-top: 0.45rem;
+        font-size: 0.78rem;
+        color: rgba(239, 68, 68, 0.85);
       }
 
       /* ── timeline ── */
@@ -177,36 +271,31 @@
         position: relative;
       }
 
-      /* LTR: line on the left at date-width + padding */
       html[lang="en"] .timeline::before {
         content: "";
         position: absolute;
         left: calc(1rem + 112px);
         top: 0;
         bottom: 0;
-        width: 2px;
-        background: var(--border);
+        width: 1px;
+        background: var(--glass-border);
       }
-
-      /* RTL: line on the right at date-width + padding */
       html[lang="he"] .timeline::before {
         content: "";
         position: absolute;
         right: calc(1rem + 112px);
         top: 0;
         bottom: 0;
-        width: 2px;
-        background: var(--border);
+        width: 1px;
+        background: var(--glass-border);
       }
 
       .event {
         display: flex;
         gap: 0;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
         position: relative;
-        transition: opacity 0.2s;
       }
-
       .event.hidden {
         display: none;
       }
@@ -215,12 +304,11 @@
         flex-shrink: 0;
         width: 100px;
         padding-top: 0.85rem;
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         font-weight: 600;
         color: var(--muted);
         line-height: 1.3;
       }
-
       html[lang="en"] .event-date {
         text-align: right;
         padding-right: 1rem;
@@ -241,39 +329,48 @@
       }
 
       .dot {
-        width: 14px;
-        height: 14px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         border: 2px solid var(--bg);
+        box-shadow: 0 0 6px currentColor;
       }
-
       .dot.deal {
         background: var(--green);
+        color: var(--green);
       }
       .dot.failed {
         background: var(--red);
+        color: var(--red);
       }
       .dot.ongoing {
         background: var(--yellow);
+        color: var(--yellow);
       }
       .dot.partial {
         background: var(--blue);
+        color: var(--blue);
       }
       .dot.strike {
         background: var(--orange);
+        color: var(--orange);
       }
 
       /* ── card ── */
       .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 10px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
         padding: 1.1rem 1.3rem;
         flex: 1;
+        backdrop-filter: blur(16px);
+        transition:
+          background 0.2s,
+          border-color 0.2s;
       }
-
       .card:hover {
-        border-color: #3a3a5a;
+        background: var(--glass-hover);
+        border-color: rgba(255, 255, 255, 0.12);
       }
 
       .card-top {
@@ -283,13 +380,12 @@
         gap: 0.5rem;
         margin-bottom: 0.5rem;
       }
-
       html[lang="he"] .card-top {
         flex-direction: row-reverse;
       }
 
       .card-title {
-        font-size: 0.97rem;
+        font-size: 0.95rem;
         font-weight: 700;
         line-height: 1.35;
       }
@@ -301,45 +397,44 @@
         border-radius: 4px;
         white-space: nowrap;
         flex-shrink: 0;
+        backdrop-filter: blur(4px);
       }
-
       html[lang="en"] .badge {
         text-transform: uppercase;
         letter-spacing: 0.06em;
       }
 
       .badge.deal {
-        background: #16532920;
+        background: rgba(22, 83, 41, 0.3);
         color: var(--green);
-        border: 1px solid #16532940;
+        border: 1px solid rgba(34, 197, 94, 0.25);
       }
       .badge.failed {
-        background: #7f1d1d20;
+        background: rgba(127, 29, 29, 0.3);
         color: var(--red);
-        border: 1px solid #7f1d1d40;
+        border: 1px solid rgba(239, 68, 68, 0.25);
       }
       .badge.ongoing {
-        background: #71350020;
+        background: rgba(113, 53, 0, 0.3);
         color: var(--yellow);
-        border: 1px solid #71350040;
+        border: 1px solid rgba(234, 179, 8, 0.25);
       }
       .badge.partial {
-        background: #1e3a5f20;
+        background: rgba(30, 58, 95, 0.3);
         color: var(--blue);
-        border: 1px solid #1e3a5f40;
+        border: 1px solid rgba(59, 130, 246, 0.25);
       }
       .badge.strike {
-        background: #43180520;
+        background: rgba(67, 24, 5, 0.3);
         color: var(--orange);
-        border: 1px solid #43180540;
+        border: 1px solid rgba(249, 115, 22, 0.25);
       }
 
       .card-desc {
         font-size: 0.87rem;
-        color: #b0b0cc;
+        color: rgba(232, 232, 240, 0.75);
         line-height: 1.6;
       }
-
       .card-why {
         margin-top: 0.6rem;
         font-size: 0.8rem;
@@ -356,14 +451,12 @@
         html[lang="he"] .timeline::before {
           right: calc(1rem + 13px);
         }
-
         .event-date {
           display: none;
         }
         .dot-wrap {
           width: 28px;
         }
-
         .stat-card {
           min-width: 110px;
           padding: 1rem 1.2rem;
@@ -376,9 +469,9 @@
   </head>
   <body>
     <header>
-      <button class="lang-toggle" id="langBtn">EN</button>
       <h1 id="hdr-title"></h1>
       <p id="hdr-sub"></p>
+      <button class="lang-toggle" id="langBtn">EN</button>
     </header>
 
     <div class="stats">
@@ -400,6 +493,17 @@
       </div>
     </div>
 
+    <div class="trump-counter">
+      <div class="trump-counter-header">
+        <div class="trump-big-number" id="trump-cnt">0</div>
+        <div class="trump-counter-label">
+          <strong id="trump-lbl-title"></strong>
+          <span id="trump-lbl-sub"></span>
+        </div>
+      </div>
+      <div class="quote-list" id="quote-list"></div>
+    </div>
+
     <div class="filters" id="filters"></div>
     <div class="timeline" id="timeline"></div>
 
@@ -410,6 +514,9 @@
           title: "טראמפ מול איראן — מד ניסיונות ההסכם",
           sub: 'כל פעם שארה"ב ואיראן היו קרובות להסכם בסכסוך 2025–2026 — ומה שבר כל ניסיון.',
           langBtn: "EN",
+          trumpTitle: "פעמים שטראמפ אמר שהסכם קרוב",
+          trumpSub: "כל ציטוט מאומת — מה אמר, מתי, ומה קרה אחר כך",
+          quoteWhat: "מה קרה אחר כך",
           stats: {
             total: "ניסיונות",
             deals: "הסכמים נחתמו",
@@ -434,6 +541,10 @@
           title: "Trump vs Iran — Deal Counter",
           sub: "Every time the US and Iran were close to a deal during the 2025–2026 conflict — and what broke it.",
           langBtn: "עב",
+          trumpTitle: "Times Trump Said a Deal Was Close",
+          trumpSub:
+            "Every verified quote — what he said, when, and what happened next",
+          quoteWhat: "What happened next",
           stats: {
             total: "Close Calls",
             deals: "Deals Signed",
@@ -684,6 +795,112 @@
         },
       ];
 
+      // ── trump quotes ─────────────────────────────────────────────
+      // Populated from verified research — will be updated when results land.
+      // Each entry: date, venue, quote (en), quote (he), outcome (en), outcome (he)
+      const trumpQuotes = [
+        {
+          date: { he: "13 באפר׳ 2025", en: "Apr 13, 2025" },
+          venue: {
+            he: "ביקור ב-Mar-a-Lago עם נתניהו",
+            en: "Mar-a-Lago press conference with Netanyahu",
+          },
+          quote: {
+            en: '"I think Iran wants to make a deal. Seriously. They want to make a deal."',
+            he: '"אני חושב שאיראן רוצה להגיע להסכם. ברצינות. הם רוצים הסכם."',
+          },
+          outcome: {
+            en: "Round 1 talks in Muscat had just opened. No deal was reached.",
+            he: "סיבוב 1 במוסקט נפתח זה עתה. לא הושג הסכם.",
+          },
+        },
+        {
+          date: { he: "22 באפר׳ 2025", en: "Apr 22, 2025" },
+          venue: {
+            he: "Air Force One, לעיתונאים",
+            en: "Air Force One, to reporters",
+          },
+          quote: {
+            en: "\"We're doing very well with Iran. I think we're going to make a deal.\"",
+            he: '"אנחנו מסתדרים טוב מאוד עם איראן. אני חושב שנגיע להסכם."',
+          },
+          outcome: {
+            en: "Witkoff reversed his position on enrichment the following day.",
+            he: "למחרת היפך ויטקוף את עמדתו בנושא ההעשרה.",
+          },
+        },
+        {
+          date: { he: "4 במאי 2025", en: "May 4, 2025" },
+          venue: { he: "NBC Meet the Press", en: "NBC Meet the Press" },
+          quote: {
+            en: '"I think we\'re going to make a deal with Iran. I really do... they want to make a deal very badly."',
+            he: '"אני חושב שנגיע להסכם עם איראן. אני באמת חושב כך... הם רוצים מאוד להגיע להסכם."',
+          },
+          outcome: {
+            en: "Same interview: also declared 'total dismantlement' the only acceptable outcome — contradicting himself within minutes.",
+            he: "באותו ראיון: הצהיר גם ש'פירוק מוחלט' הוא התוצאה היחידה המקובלת — סתר את עצמו תוך דקות.",
+          },
+        },
+        {
+          date: { he: "12 במאי 2025", en: "May 12, 2025" },
+          venue: { he: "Truth Social", en: "Truth Social" },
+          quote: {
+            en: '"Iran has a chance to be a great country, and I look forward to meeting with their leaders very soon to work out a DEAL!"',
+            he: '"לאיראן יש סיכוי להיות מדינה גדולה, ואני מצפה לפגוש את מנהיגיהם בקרוב מאוד לגיבוש הסכם!"',
+          },
+          outcome: {
+            en: "No meeting was ever scheduled. Round 3 talks in Muscat ended without agreement the day before.",
+            he: "שום פגישה לא נקבעה. סיבוב 3 במוסקט הסתיים ללא הסכם יום קודם.",
+          },
+        },
+        {
+          date: { he: "29 במאי 2025", en: "May 29, 2025" },
+          venue: {
+            he: "מסיבת עיתונאים בבית הלבן",
+            en: "White House press conference",
+          },
+          quote: {
+            en: '"We\'re getting very close with Iran. Something could happen very soon. Very, very soon."',
+            he: '"אנחנו מתקרבים מאוד עם איראן. משהו יכול לקרות בקרוב מאוד. מהר מאוד."',
+          },
+          outcome: {
+            en: "Trump's 60-day deadline expired 14 days later. Israel launched the Twelve-Day War the day after.",
+            he: "המועד האחרון של 60 הימים של טראמפ פג 14 יום לאחר מכן. ישראל פתחה את מלחמת 12 הימים יום לאחריו.",
+          },
+        },
+        {
+          date: { he: "12 ביוני 2025", en: "Jun 12, 2025" },
+          venue: { he: "ראיון ל-CNN", en: "CNN interview" },
+          quote: {
+            en: '"They want to make a deal. I know they want to make a deal. We could have had a deal a long time ago."',
+            he: '"הם רוצים לעשות הסכם. אני יודע שהם רוצים הסכם. יכולנו להגיע להסכם מזמן."',
+          },
+          outcome: {
+            en: "This was the day his 60-day ultimatum expired ('today is day 61'). Israel attacked the next morning.",
+            he: "זה היה היום שבו פג האולטימטום שלו לפני 60 ימים ('היום הוא יום 61'). ישראל תקפה בבוקר שלמחרת.",
+          },
+        },
+      ];
+
+      function renderTrumpCounter() {
+        const t = T[lang];
+        document.getElementById("trump-cnt").textContent = trumpQuotes.length;
+        document.getElementById("trump-lbl-title").textContent = t.trumpTitle;
+        document.getElementById("trump-lbl-sub").textContent = t.trumpSub;
+
+        const list = document.getElementById("quote-list");
+        list.innerHTML = "";
+        trumpQuotes.forEach((q) => {
+          const div = document.createElement("div");
+          div.className = "quote-item";
+          div.innerHTML = `
+            <div class="quote-meta">${q.date[lang]} &nbsp;·&nbsp; ${q.venue[lang]}</div>
+            <div class="quote-text">${q.quote[lang]}</div>
+            <div class="quote-outcome">↳ ${q.outcome[lang]}</div>`;
+          list.appendChild(div);
+        });
+      }
+
       // ── state ─────────────────────────────────────────────────────
       let lang = "he";
       let activeFilter = "all";
@@ -703,6 +920,7 @@
         document.getElementById("lbl-ongoing").textContent = T[l].stats.ongoing;
         buildFilters();
         render(activeFilter);
+        renderTrumpCounter();
       }
 
       function buildFilters() {
