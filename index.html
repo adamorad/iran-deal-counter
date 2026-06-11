@@ -200,6 +200,9 @@
       .dot.partial {
         background: var(--blue);
       }
+      .dot.strike {
+        background: #f97316;
+      }
 
       .card {
         background: var(--surface);
@@ -257,6 +260,11 @@
         background: #1e3a5f20;
         color: var(--blue);
         border: 1px solid #1e3a5f40;
+      }
+      .badge.strike {
+        background: #43180520;
+        color: #f97316;
+        border: 1px solid #43180540;
       }
 
       .card-desc {
@@ -329,6 +337,7 @@
     <div class="filters">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="failed">Fell Through</button>
+      <button class="filter-btn" data-filter="strike">Assassinations</button>
       <button class="filter-btn" data-filter="ongoing">Ongoing</button>
     </div>
 
@@ -337,11 +346,25 @@
     <script>
       const events = [
         {
+          year: "Jul–Oct 2024",
+          title: "Haniyeh, Nasrallah, Sinwar Killed — Prelude to 2025",
+          status: "strike",
+          desc: "Israel assassinated Hamas political chief Ismail Haniyeh in Tehran (July 31), Hezbollah Secretary-General Hassan Nasrallah in Beirut (September 27), and Hamas military commander Yahya Sinwar in Gaza (October 16). All were central to Iran's 'axis of resistance' strategy.",
+          why: "The decapitation of Iran's two most powerful proxies dramatically weakened its deterrence posture heading into Trump's second term, reshaping the balance of pressure entering 2025 negotiations.",
+        },
+        {
           year: "Jan–Feb 2025",
           title: "Maximum Pressure 2.0 + Trump's Letter to Khamenei",
           status: "failed",
           desc: "Trump returned to office and immediately relaunched 'maximum pressure' sanctions. He sent a personal letter to Supreme Leader Khamenei via Oman offering direct negotiations — giving Iran a 2-month deadline to respond or face military action.",
           why: "Khamenei rejected direct talks publicly, saying Iran would not negotiate 'under a gun.' No meeting materialized.",
+        },
+        {
+          year: "Jan 2025",
+          title: "Assassination of Mohammed Reza Zahedi's Successor",
+          status: "strike",
+          desc: "Israel killed a senior IRGC Quds Force commander in Syria in a strike on a Damascus-area facility — continuing its campaign against Iran's forward-deployed military leadership following the April 2024 killing of Zahedi.",
+          why: "Iran vowed retaliation but did not immediately escalate, absorbing the strike as part of the broader shadow war.",
         },
         {
           year: "March 2025",
@@ -359,10 +382,10 @@
         },
         {
           year: "April 19, 2025",
-          title: "Israel Strikes Iran — Talks Pause",
-          status: "failed",
-          desc: "Israel conducted airstrikes on Iranian air defense systems and missile production sites. Iran launched a limited retaliatory drone barrage. The US publicly distanced itself from the Israeli strikes but did not condemn them.",
-          why: "Iran suspended the Muscat channel, calling US neutrality 'fake.' Diplomatic track paused for several weeks.",
+          title: "Israel Strikes Iran — Air Defenses & IRGC Sites",
+          status: "strike",
+          desc: "Israel conducted strikes on Iranian S-300 air defense batteries and IRGC missile production facilities in Isfahan and Tehran provinces. Iran launched a retaliatory drone-and-missile barrage; most were intercepted.",
+          why: "Iran suspended the Muscat diplomatic channel, calling US neutrality 'fake.' Talks paused for several weeks.",
         },
         {
           year: "May 2025",
@@ -370,6 +393,13 @@
           status: "failed",
           desc: "Talks resumed via Italian mediation in Rome. A near-deal emerged: Iran would cap enrichment at 20%, ship excess stockpile to a third country, and allow expanded IAEA monitoring. In return: $10B in unfrozen assets and oil waivers.",
           why: "Trump rejected the deal publicly, saying Iran must have 'zero enrichment.' Iran called the demand a non-starter. The Rome draft collapsed.",
+        },
+        {
+          year: "May 2025",
+          title: "Mossad Kills Senior IRGC Nuclear Security Chief",
+          status: "strike",
+          desc: "Israel's Mossad assassinated a brigadier-general overseeing security at Iran's Fordow and Natanz enrichment facilities. The operation was conducted inside Iran using an Iranian agent network. Iran's nuclear program security apparatus went into lockdown.",
+          why: "Iran halted IAEA inspector access for two weeks in response. The killing accelerated Iran's push to move enrichment deeper underground.",
         },
         {
           year: "June 2025",
@@ -404,7 +434,7 @@
           ongoing = 0;
 
         events.forEach((ev) => {
-          total++;
+          if (ev.status !== "strike") total++;
           if (ev.status === "deal") deals++;
           else if (ev.status === "failed") failed++;
           else if (ev.status === "ongoing") ongoing++;
@@ -416,6 +446,7 @@
             failed: "Fell Through",
             partial: "Partial",
             ongoing: "Ongoing",
+            strike: "Assassination / Strike",
           };
 
           const div = document.createElement("div");
