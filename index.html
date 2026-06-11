@@ -515,7 +515,8 @@
           sub: 'כל פעם שארה"ב ואיראן היו קרובות להסכם בסכסוך 2025–2026 — ומה שבר כל ניסיון.',
           langBtn: "EN",
           trumpTitle: "פעמים שטראמפ אמר שהסכם קרוב",
-          trumpSub: "כל ציטוט מאומת — מה אמר, מתי, ומה קרה אחר כך",
+          trumpSub:
+            "CNN ספרה 37–38 הצהרות בין מאוחר מרץ ל-9 ביוני 2026 — 4 המתועדות ביותר מוצגות",
           quoteWhat: "מה קרה אחר כך",
           stats: {
             total: "ניסיונות",
@@ -543,7 +544,7 @@
           langBtn: "עב",
           trumpTitle: "Times Trump Said a Deal Was Close",
           trumpSub:
-            "Every verified quote — what he said, when, and what happened next",
+            "CNN counted 37–38 claims between late March and June 9, 2026 — 4 most documented shown below",
           quoteWhat: "What happened next",
           stats: {
             total: "Close Calls",
@@ -797,94 +798,71 @@
 
       // ── trump quotes ─────────────────────────────────────────────
       // Populated from verified research — will be updated when results land.
-      // Each entry: date, venue, quote (en), quote (he), outcome (en), outcome (he)
+      // Verified quotes — 4 most documented from the 37-38 CNN counted (late Mar–Jun 9, 2026)
+      const TRUMP_TOTAL = 37;
       const trumpQuotes = [
         {
-          date: { he: "13 באפר׳ 2025", en: "Apr 13, 2025" },
-          venue: {
-            he: "ביקור ב-Mar-a-Lago עם נתניהו",
-            en: "Mar-a-Lago press conference with Netanyahu",
-          },
-          quote: {
-            en: '"I think Iran wants to make a deal. Seriously. They want to make a deal."',
-            he: '"אני חושב שאיראן רוצה להגיע להסכם. ברצינות. הם רוצים הסכם."',
-          },
-          outcome: {
-            en: "Round 1 talks in Muscat had just opened. No deal was reached.",
-            he: "סיבוב 1 במוסקט נפתח זה עתה. לא הושג הסכם.",
-          },
-        },
-        {
-          date: { he: "22 באפר׳ 2025", en: "Apr 22, 2025" },
-          venue: {
-            he: "Air Force One, לעיתונאים",
-            en: "Air Force One, to reporters",
-          },
-          quote: {
-            en: "\"We're doing very well with Iran. I think we're going to make a deal.\"",
-            he: '"אנחנו מסתדרים טוב מאוד עם איראן. אני חושב שנגיע להסכם."',
-          },
-          outcome: {
-            en: "Witkoff reversed his position on enrichment the following day.",
-            he: "למחרת היפך ויטקוף את עמדתו בנושא ההעשרה.",
-          },
-        },
-        {
-          date: { he: "4 במאי 2025", en: "May 4, 2025" },
-          venue: { he: "NBC Meet the Press", en: "NBC Meet the Press" },
-          quote: {
-            en: '"I think we\'re going to make a deal with Iran. I really do... they want to make a deal very badly."',
-            he: '"אני חושב שנגיע להסכם עם איראן. אני באמת חושב כך... הם רוצים מאוד להגיע להסכם."',
-          },
-          outcome: {
-            en: "Same interview: also declared 'total dismantlement' the only acceptable outcome — contradicting himself within minutes.",
-            he: "באותו ראיון: הצהיר גם ש'פירוק מוחלט' הוא התוצאה היחידה המקובלת — סתר את עצמו תוך דקות.",
-          },
-        },
-        {
-          date: { he: "12 במאי 2025", en: "May 12, 2025" },
+          date: { he: "7 באפר׳ 2026", en: "Apr 7, 2026" },
           venue: { he: "Truth Social", en: "Truth Social" },
           quote: {
-            en: '"Iran has a chance to be a great country, and I look forward to meeting with their leaders very soon to work out a DEAL!"',
-            he: '"לאיראן יש סיכוי להיות מדינה גדולה, ואני מצפה לפגוש את מנהיגיהם בקרוב מאוד לגיבוש הסכם!"',
+            en: '"We have already met and exceeded all Military objectives, and are very far along with a definitive Agreement concerning Longterm PEACE with Iran. A two week period will allow the Agreement to be finalized and consummated."',
+            he: '"כבר עמדנו בכל היעדים הצבאיים ועברנו אותם, ואנחנו בשלב מתקדם מאוד עם הסכם מגדיר לשלום לטווח ארוך עם איראן. תקופה של שבועיים תאפשר לגבש ולסיים את ההסכם."',
           },
           outcome: {
-            en: "No meeting was ever scheduled. Round 3 talks in Muscat ended without agreement the day before.",
-            he: "שום פגישה לא נקבעה. סיבוב 3 במוסקט הסתיים ללא הסכם יום קודם.",
+            en: "The two-week deadline (Apr 21) was not met. Trump extended the ceasefire 'indefinitely,' acknowledging Iran had violated it 'numerous times.'",
+            he: "המועד האחרון לשבועיים (21 באפריל) לא עמד בו. טראמפ האריך את הפסקת האש 'ללא הגבלת זמן', תוך הודאה שאיראן הפרה אותה 'פעמים רבות'.",
           },
         },
         {
-          date: { he: "29 במאי 2025", en: "May 29, 2025" },
+          date: { he: "17 באפר׳ 2026", en: "Apr 17, 2026" },
           venue: {
-            he: "מסיבת עיתונאים בבית הלבן",
-            en: "White House press conference",
+            he: "ראיון טלפוני ל-CBS ול-Axios",
+            en: "CBS News & Axios phone interviews",
           },
           quote: {
-            en: '"We\'re getting very close with Iran. Something could happen very soon. Very, very soon."',
-            he: '"אנחנו מתקרבים מאוד עם איראן. משהו יכול לקרות בקרוב מאוד. מהר מאוד."',
+            en: "Iran has 'agreed to everything.' + 'I think we will get a deal in the next day or two.'",
+            he: "איראן 'הסכימה לכל דבר' + 'אני חושב שנגיע להסכם ביום-יומיים'.",
           },
           outcome: {
-            en: "Trump's 60-day deadline expired 14 days later. Israel launched the Twelve-Day War the day after.",
-            he: "המועד האחרון של 60 הימים של טראמפ פג 14 יום לאחר מכן. ישראל פתחה את מלחמת 12 הימים יום לאחריו.",
+            en: "Iran's foreign ministry contradicted him within hours: enriched uranium 'will not be transferred anywhere under any circumstances.' No deal followed.",
+            he: "משרד החוץ האיראני סתר אותו תוך שעות: האורניום המועשר 'לא יועבר לשום מקום בשום נסיבות'. לא הגיעו להסכם.",
           },
         },
         {
-          date: { he: "12 ביוני 2025", en: "Jun 12, 2025" },
-          venue: { he: "ראיון ל-CNN", en: "CNN interview" },
+          date: { he: "7 ביוני 2026", en: "Jun 7, 2026" },
+          venue: {
+            he: "NBC Meet the Press (הוקלט ב-5 ביוני, חווה Custer Farms, Wisconsin)",
+            en: "NBC Meet the Press (taped Jun 5, Custer Farms, Chippewa Falls, WI)",
+          },
           quote: {
-            en: '"They want to make a deal. I know they want to make a deal. We could have had a deal a long time ago."',
-            he: '"הם רוצים לעשות הסכם. אני יודע שהם רוצים הסכם. יכולנו להגיע להסכם מזמן."',
+            en: "\"I'm going to do it either through negotiation, where we're very close to a deal, or I'm going to blow the hell out of them.\"",
+            he: '"אני הולך לעשות את זה או דרך משא ומתן, שבו אנחנו קרובים מאוד להסכם, או שאני הולך לפוצץ אותם ממש."',
           },
           outcome: {
-            en: "This was the day his 60-day ultimatum expired ('today is day 61'). Israel attacked the next morning.",
-            he: "זה היה היום שבו פג האולטימטום שלו לפני 60 ימים ('היום הוא יום 61'). ישראל תקפה בבוקר שלמחרת.",
+            en: "US CENTCOM launched strikes on Iran 48 hours later on Jun 9, 2026, after Iran downed a US Apache helicopter near the Strait of Hormuz.",
+            he: "US CENTCOM יצא לתקיפות נגד איראן 48 שעות לאחר מכן, ב-9 ביוני 2026, לאחר שאיראן הפילה מסוק Apache אמריקני ליד מצר הורמוז.",
+          },
+        },
+        {
+          date: { he: "8 ביוני 2026", en: "Jun 8, 2026" },
+          venue: {
+            he: "שדה התעופה JFK לאחר גמה 3 של גמר ה-NBA (ניקס מול ספרס, MSG)",
+            en: "JFK Airport after NBA Finals Game 3 (Knicks vs Spurs, MSG)",
+          },
+          quote: {
+            en: '"We\'re in the final throes of what will be a very, very good deal that will not in any way allow nuclear weapons." Asked days or weeks: "Two or three days." Truth Social same night: "Final negotiations on Peace are proceeding. Things should move quickly."',
+            he: '"אנחנו בשלבים הסופיים של מה שיהיה הסכם טוב מאוד מאוד שלא יאפשר בשום אופן נשק גרעיני." לשאלה — ימים או שבועות: "יומיים או שלושה." Truth Social באותו לילה: "המשא ומתן הסופי על שלום מתנהל. הדברים צריכים להתקדם במהירות."',
+          },
+          outcome: {
+            en: "US strikes launched the next morning, Jun 9, 2026. This was claim #37 in CNN's count of 37-38 total 'deal is imminent' statements.",
+            he: "תקיפות ארה\"ב נפתחו בבוקר שלמחרת, 9 ביוני 2026. זה היה ציטוט מס' 37 במניין CNN של 37–38 הצהרות 'ההסכם קרוב'.",
           },
         },
       ];
 
       function renderTrumpCounter() {
         const t = T[lang];
-        document.getElementById("trump-cnt").textContent = trumpQuotes.length;
+        document.getElementById("trump-cnt").textContent = TRUMP_TOTAL + "+";
         document.getElementById("trump-lbl-title").textContent = t.trumpTitle;
         document.getElementById("trump-lbl-sub").textContent = t.trumpSub;
 
