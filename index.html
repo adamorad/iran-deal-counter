@@ -1,9 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trump vs Iran: Deal Counter</title>
+    <title>טראמפ מול איראן — מד ניסיונות ההסכם</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --bg: #0a0a0f;
@@ -16,6 +22,7 @@
         --yellow: #eab308;
         --blue: #3b82f6;
         --accent: #6366f1;
+        --orange: #f97316;
       }
 
       * {
@@ -24,38 +31,68 @@
         padding: 0;
       }
 
+      html[lang="he"] body {
+        font-family: "Heebo", sans-serif;
+      }
+      html[lang="en"] body {
+        font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      }
+
       body {
         background: var(--bg);
         color: var(--text);
-        font-family:
-          "Segoe UI",
-          system-ui,
-          -apple-system,
-          sans-serif;
         min-height: 100vh;
       }
 
+      /* ── header ── */
       header {
         border-bottom: 1px solid var(--border);
         padding: 2.5rem 1rem 2rem;
         text-align: center;
+        position: relative;
       }
 
       header h1 {
-        font-size: clamp(1.6rem, 4vw, 2.6rem);
-        font-weight: 700;
-        letter-spacing: -0.02em;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 800;
         margin-bottom: 0.5rem;
+        letter-spacing: -0.01em;
       }
 
       header p {
         color: var(--muted);
         font-size: 0.95rem;
-        max-width: 520px;
+        max-width: 540px;
         margin: 0 auto;
-        line-height: 1.5;
+        line-height: 1.6;
       }
 
+      .lang-toggle {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 6px;
+        padding: 0.35rem 0.8rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+      }
+      html[lang="en"] .lang-toggle {
+        left: auto;
+        right: 1.2rem;
+      }
+      .lang-toggle:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      /* ── stats ── */
       .stats {
         display: flex;
         justify-content: center;
@@ -86,9 +123,14 @@
 
       .stat-card .label {
         font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
         color: var(--muted);
+        line-height: 1.3;
+      }
+
+      html[lang="en"] .stat-card .label {
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        font-size: 0.72rem;
       }
 
       .stat-card.total .number {
@@ -104,6 +146,7 @@
         color: var(--yellow);
       }
 
+      /* ── filters ── */
       .filters {
         display: flex;
         justify-content: center;
@@ -121,6 +164,7 @@
         font-size: 0.82rem;
         cursor: pointer;
         transition: all 0.15s;
+        font-family: inherit;
       }
 
       .filter-btn:hover,
@@ -130,6 +174,7 @@
         color: #fff;
       }
 
+      /* ── timeline ── */
       .timeline {
         max-width: 860px;
         margin: 0 auto;
@@ -137,10 +182,22 @@
         position: relative;
       }
 
-      .timeline::before {
+      /* LTR: line on the left at date-width + padding */
+      html[lang="en"] .timeline::before {
         content: "";
         position: absolute;
         left: calc(1rem + 112px);
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+      }
+
+      /* RTL: line on the right at date-width + padding */
+      html[lang="he"] .timeline::before {
+        content: "";
+        position: absolute;
+        right: calc(1rem + 112px);
         top: 0;
         bottom: 0;
         width: 2px;
@@ -162,13 +219,20 @@
       .event-date {
         flex-shrink: 0;
         width: 100px;
-        text-align: right;
-        padding-right: 1rem;
         padding-top: 0.85rem;
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         font-weight: 600;
         color: var(--muted);
         line-height: 1.3;
+      }
+
+      html[lang="en"] .event-date {
+        text-align: right;
+        padding-right: 1rem;
+      }
+      html[lang="he"] .event-date {
+        text-align: left;
+        padding-left: 1rem;
       }
 
       .dot-wrap {
@@ -201,9 +265,10 @@
         background: var(--blue);
       }
       .dot.strike {
-        background: #f97316;
+        background: var(--orange);
       }
 
+      /* ── card ── */
       .card {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -224,21 +289,28 @@
         margin-bottom: 0.5rem;
       }
 
+      html[lang="he"] .card-top {
+        flex-direction: row-reverse;
+      }
+
       .card-title {
         font-size: 0.97rem;
-        font-weight: 600;
-        line-height: 1.3;
+        font-weight: 700;
+        line-height: 1.35;
       }
 
       .badge {
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
         padding: 0.2rem 0.55rem;
         border-radius: 4px;
         white-space: nowrap;
         flex-shrink: 0;
+      }
+
+      html[lang="en"] .badge {
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
       }
 
       .badge.deal {
@@ -263,14 +335,14 @@
       }
       .badge.strike {
         background: #43180520;
-        color: #f97316;
+        color: var(--orange);
         border: 1px solid #43180540;
       }
 
       .card-desc {
-        font-size: 0.855rem;
+        font-size: 0.87rem;
         color: #b0b0cc;
-        line-height: 1.55;
+        line-height: 1.6;
       }
 
       .card-why {
@@ -278,24 +350,25 @@
         font-size: 0.8rem;
         color: var(--muted);
         font-style: italic;
+        line-height: 1.5;
       }
 
+      /* ── mobile ── */
       @media (max-width: 560px) {
-        .timeline::before {
+        html[lang="en"] .timeline::before {
           left: calc(1rem + 13px);
         }
+        html[lang="he"] .timeline::before {
+          right: calc(1rem + 13px);
+        }
+
         .event-date {
           display: none;
         }
         .dot-wrap {
           width: 28px;
         }
-        .card-title::before {
-          content: attr(data-date) " · ";
-          color: var(--muted);
-          font-weight: 400;
-          font-size: 0.75rem;
-        }
+
         .stat-card {
           min-width: 110px;
           padding: 1rem 1.2rem;
@@ -303,153 +376,372 @@
         .stat-card .number {
           font-size: 2.2rem;
         }
+
+        .lang-toggle {
+          top: 0.8rem;
+          left: 0.8rem;
+        }
+        html[lang="en"] .lang-toggle {
+          left: auto;
+          right: 0.8rem;
+        }
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Trump vs Iran &nbsp; Deal Counter</h1>
-      <p>
-        Every time the US and Iran were close to a deal during the
-        2025&ndash;2026 conflict — and what broke it each time.
-      </p>
+      <button class="lang-toggle" id="langBtn">EN</button>
+      <h1 id="hdr-title"></h1>
+      <p id="hdr-sub"></p>
     </header>
 
     <div class="stats">
       <div class="stat-card total">
         <div class="number" id="cnt-total">0</div>
-        <div class="label">Close Calls</div>
+        <div class="label" id="lbl-total"></div>
       </div>
       <div class="stat-card deals">
         <div class="number" id="cnt-deals">0</div>
-        <div class="label">Deals Signed</div>
+        <div class="label" id="lbl-deals"></div>
       </div>
       <div class="stat-card failed">
         <div class="number" id="cnt-failed">0</div>
-        <div class="label">Fell Through</div>
+        <div class="label" id="lbl-failed"></div>
       </div>
       <div class="stat-card ongoing">
         <div class="number" id="cnt-ongoing">0</div>
-        <div class="label">Ongoing / Open</div>
+        <div class="label" id="lbl-ongoing"></div>
       </div>
     </div>
 
-    <div class="filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="failed">Fell Through</button>
-      <button class="filter-btn" data-filter="strike">Assassinations</button>
-      <button class="filter-btn" data-filter="ongoing">Ongoing</button>
-    </div>
-
+    <div class="filters" id="filters"></div>
     <div class="timeline" id="timeline"></div>
 
     <script>
+      // ── translations ──────────────────────────────────────────────
+      const T = {
+        he: {
+          title: "טראמפ מול איראן — מד ניסיונות ההסכם",
+          sub: 'כל פעם שארה"ב ואיראן היו קרובות להסכם בסכסוך 2025–2026 — ומה שבר כל ניסיון.',
+          langBtn: "EN",
+          stats: {
+            total: "ניסיונות",
+            deals: "הסכמים נחתמו",
+            failed: "קרסו",
+            ongoing: "בתהליך",
+          },
+          filters: {
+            all: "הכל",
+            failed: "קרסו",
+            strike: "חיסולים / תקיפות",
+            ongoing: "בתהליך",
+          },
+          labels: {
+            deal: "הסכם נחתם",
+            failed: "קרס",
+            partial: "חלקי",
+            ongoing: "בתהליך",
+            strike: "חיסול / תקיפה",
+          },
+        },
+        en: {
+          title: "Trump vs Iran — Deal Counter",
+          sub: "Every time the US and Iran were close to a deal during the 2025–2026 conflict — and what broke it.",
+          langBtn: "עב",
+          stats: {
+            total: "Close Calls",
+            deals: "Deals Signed",
+            failed: "Fell Through",
+            ongoing: "Ongoing",
+          },
+          filters: {
+            all: "All",
+            failed: "Fell Through",
+            strike: "Assassinations",
+            ongoing: "Ongoing",
+          },
+          labels: {
+            deal: "Deal Reached",
+            failed: "Fell Through",
+            partial: "Partial",
+            ongoing: "Ongoing",
+            strike: "Assassination / Strike",
+          },
+        },
+      };
+
+      // ── events ────────────────────────────────────────────────────
       const events = [
         {
-          year: "Jul–Oct 2024",
-          title: "Haniyeh, Nasrallah & Sinwar Assassinated",
+          year: { he: "יול׳–אוק׳ 2024", en: "Jul–Oct 2024" },
+          title: {
+            he: "חיסול חניה, נסראללה וסינוואר — הרקע ל-2025",
+            en: "Haniyeh, Nasrallah & Sinwar Assassinated",
+          },
           status: "strike",
-          desc: "Israel killed Hamas political chief Ismail Haniyeh in Tehran (Jul 31), Hezbollah leader Hassan Nasrallah in Beirut (Sep 27), and Hamas commander Yahya Sinwar in Gaza (Oct 16) — dismantling Iran's 'axis of resistance' proxy network before Trump returned to office.",
-          why: "Iran's deterrence posture collapsed. Entering 2025 with no functional proxies and no nuclear deal, Tehran faced Trump's second term at its weakest strategic position in decades.",
+          desc: {
+            he: 'ישראל חיסלה את ראש הלשכה המדינית של חמאס ישמעאל הניה בטהרן (31.7), את מזכ"ל חזבאללה חסן נסראללה בביירות (27.9) ואת מפקד החמאס יחיא סינוואר בעזה (16.10) — ופירקה בפועל את רשת הפרוקסי של ציר ההתנגדות האיראני לפני חזרתו של טראמפ לשלטון.',
+            en: "Israel killed Hamas political chief Ismail Haniyeh in Tehran (Jul 31), Hezbollah leader Hassan Nasrallah in Beirut (Sep 27), and Hamas commander Yahya Sinwar in Gaza (Oct 16) — dismantling Iran's proxy network before Trump returned to office.",
+          },
+          why: {
+            he: "עמדת ההרתעה של איראן קרסה. כשנכנסה ל-2025 ללא פרוקסים פעילים ובלי הסכם גרעיני, טהרן עמדה מול הכהונה השנייה של טראמפ בנקודת תורפה אסטרטגית שלא הייתה לה כמוה מזה עשורים.",
+            en: "Iran's deterrence posture collapsed. Entering 2025 with no functional proxies and no nuclear deal, Tehran faced Trump's second term at its weakest strategic position in decades.",
+          },
         },
         {
-          year: "Jan–Feb 2025",
-          title: "Trump's Letter & 60-Day Ultimatum",
+          year: { he: "ינו׳–פבר׳ 2025", en: "Jan–Feb 2025" },
+          title: {
+            he: "מכתב טראמפ ואולטימטום 60 הימים",
+            en: "Trump's Letter & 60-Day Ultimatum",
+          },
           status: "failed",
-          desc: "Trump took office, relaunched 'maximum pressure' sanctions, and sent a personal letter to Supreme Leader Khamenei via Oman. He gave Iran a 60-day deadline to begin negotiations — or face military action.",
-          why: "Khamenei rejected direct talks publicly. Iran's position: it would not negotiate 'under a gun.' The clock started ticking around April 12–13 when talks opened.",
+          desc: {
+            he: "טראמפ חזר לבית הלבן, השיק מחדש את מדיניות ה'לחץ המרבי' ושלח מכתב אישי לח'אמנאי דרך עומאן. הוא נתן לאיראן 60 ימים להתחיל במשא ומתן — אחרת פעולה צבאית. השעון התחיל לרוץ בסביבות 12–13 באפריל, עם פתיחת השיחות.",
+            en: "Trump took office, relaunched 'maximum pressure' sanctions, and sent a personal letter to Supreme Leader Khamenei via Oman. He gave Iran a 60-day deadline to begin negotiations — or face military action. The clock started around April 12–13 when talks opened.",
+          },
+          why: {
+            he: "ח'אמנאי דחה שיחות ישירות בפומבי. עמדת איראן: לא מנהלים משא ומתן 'בצל איום'.",
+            en: "Khamenei rejected direct talks publicly. Iran's position: it would not negotiate 'under a gun.'",
+          },
         },
         {
-          year: "Apr 12–13, 2025",
-          title: "Round 1 — Muscat (Omani-Mediated)",
+          year: { he: "12–13 באפר׳ 2025", en: "Apr 12–13, 2025" },
+          title: {
+            he: "סיבוב 1 — מוסקט (תיווך עומאני)",
+            en: "Round 1 — Muscat (Omani-Mediated)",
+          },
           status: "failed",
-          desc: "First round of Omani-mediated nuclear talks in Muscat. Trump's 60-day deadline clock started here. Envoy Steve Witkoff led for the US; Iran sent senior nuclear negotiators. IAEA had just reported Iran held 408.6 kg of 60%-enriched uranium — well above the 3.67% JCPOA limit.",
-          why: "No agreement. Iran cited US 'contradictory behaviour' as a reason for the slow pace.",
+          desc: {
+            he: 'הסיבוב הראשון של שיחות גרעין בתיווך עומאני במוסקט. שעון 60 הימים של טראמפ התחיל כאן. סטיב ויטקוף הוביל עבור ארה"ב; איראן שלחה מנהלי משא ומתן גרעיניים בכירים. הסוכנות לאנרגיה אטומית דיווחה שאיראן מחזיקה 408.6 ק"ג אורניום מועשר ב-60% — גבוה בהרבה ממגבלת 3.67% של הסכם הגרעיני.',
+            en: "First round of Omani-mediated nuclear talks in Muscat. Trump's 60-day deadline clock started here. Envoy Steve Witkoff led for the US; Iran sent senior nuclear negotiators. The IAEA had just reported Iran held 408.6 kg of 60%-enriched uranium — well above the 3.67% JCPOA limit.",
+          },
+          why: {
+            he: "ללא הסכם. איראן ציינה 'התנהגות סותרת' של ארה\"ב כגורם להאטת הקצב.",
+            en: "No agreement. Iran cited US 'contradictory behaviour' as a reason for the slow pace.",
+          },
         },
         {
-          year: "Apr 14–15, 2025",
-          title: "Witkoff Reversal: 3.67% → 'Complete Dismantlement'",
+          year: { he: "14–15 באפר׳ 2025", en: "Apr 14–15, 2025" },
+          title: {
+            he: "הפיכת ויטקוף: מ-3.67% ל'פירוק מוחלט' — תוך יממה",
+            en: "Witkoff Reversal: 3.67% → 'Complete Dismantlement'",
+          },
           status: "failed",
-          desc: "On April 14, Witkoff told Fox News the US would accept Iran reducing enrichment to 3.67% with intrusive monitoring. The next day, he posted on X that Iran must 'stop and eliminate its nuclear enrichment and weaponization program' entirely — a complete reversal within 24 hours.",
-          why: "The contradiction undermined Iran's ability to evaluate any US proposal. Iran cited it as evidence the US wasn't negotiating in good faith.",
+          desc: {
+            he: "ב-14 באפריל הצהיר ויטקוף לפוקס ניוז שארה\"ב תסכים להפחתת העשרה ל-3.67% עם פיקוח הדוק. למחרת פרסם ב-X שאיראן חייבת 'לעצור ולחסל את כל תוכנית ההעשרה הגרעינית שלה' — היפוך מלא תוך 24 שעות.",
+            en: "On April 14, Witkoff told Fox News the US would accept enrichment reduced to 3.67% with intrusive monitoring. The next day he posted on X that Iran must 'stop and eliminate its nuclear enrichment and weaponization program' — a complete reversal within 24 hours.",
+          },
+          why: {
+            he: 'הסתירה ערערה את יכולת איראן להעריך כל הצעה אמריקנית. איראן ציינה זאת כראיה שארה"ב אינה מנהלת משא ומתן בתום לב.',
+            en: "The contradiction undermined Iran's ability to evaluate any US proposal. Iran cited it as evidence the US wasn't negotiating in good faith.",
+          },
         },
         {
-          year: "Apr 26, 2025",
-          title: "Round 2 — Muscat, Technical-Level Discussions",
+          year: { he: "26 באפר׳ 2025", en: "Apr 26, 2025" },
+          title: {
+            he: "סיבוב 2 — מוסקט, דיונים טכניים",
+            en: "Round 2 — Muscat, Technical-Level Discussions",
+          },
           status: "failed",
-          desc: "Third round of talks in Oman (including technical experts on both sides). Discussions went into the details of centrifuge counts and enrichment levels. A fourth round was scheduled for May 3.",
-          why: "Round postponed by Oman citing logistics; Iran cited US 'contradictory behaviour.' Rescheduled to May 11.",
+          desc: {
+            he: "סיבוב שלישי במוסקט (כולל מומחים טכניים משני הצדדים). הדיונים ירדו לפרטי ספירת הצנטריפוגות ורמות ההעשרה. סיבוב רביעי נקבע ל-3 במאי.",
+            en: "Third round of talks in Oman including technical experts on both sides. Discussions went into the details of centrifuge counts and enrichment levels. A fourth round was scheduled for May 3.",
+          },
+          why: {
+            he: "הסיבוב נדחה — עומאן ציינה סיבות לוגיסטיות; איראן ציינה 'התנהגות סותרת'. נקבע מחדש ל-11 במאי.",
+            en: "Round postponed — Oman cited logistics; Iran cited US 'contradictory behaviour.' Rescheduled to May 11.",
+          },
         },
         {
-          year: "May 4, 2025",
-          title: "Trump: 'Total Dismantlement. That Is All I Would Accept.'",
+          year: { he: "4 במאי 2025", en: "May 4, 2025" },
+          title: {
+            he: "טראמפ: 'פירוק מוחלט. זה כל מה שאקבל.'",
+            en: "Trump: 'Total Dismantlement. That Is All I Would Accept.'",
+          },
           status: "failed",
-          desc: "On Meet the Press, Trump declared: 'Total dismantlement. Yes, that is all I would accept.' VP Vance contradicted him three days later at the Munich Leaders Meeting, suggesting limited enrichment below weapons-grade might be acceptable. A leaked 14-point US memo simultaneously called for a mere 'moratorium' on enrichment.",
-          why: "Three irreconcilable US positions existed simultaneously. Iran's FM Araghchi said negotiating was 'impossible' with such contradictions.",
+          desc: {
+            he: "ב-Meet the Press הצהיר טראמפ: 'פירוק מוחלט. כן, זה כל מה שאקבל.' שלושה ימים לאחר מכן סתר אותו סגן הנשיא ואנס, שרמז שהעשרה מוגבלת מתחת לדרגת נשק עשויה להיות מקובלת. מזכר משא ומתן בן 14 סעיפים שדלף קרא בו-זמנית רק ל'מוראטוריום' על העשרה.",
+            en: "On Meet the Press, Trump declared: 'Total dismantlement. Yes, that is all I would accept.' VP Vance contradicted him three days later, suggesting limited enrichment below weapons-grade might be acceptable. A leaked 14-point US memo simultaneously called for a mere 'moratorium' on enrichment.",
+          },
+          why: {
+            he: "שלוש עמדות אמריקניות בלתי-ניתנות-לפיוס התקיימו בו-זמנית. שר החוץ האיראני עראקצ'י אמר שמשא ומתן 'בלתי אפשרי' בנסיבות כאלה.",
+            en: "Three irreconcilable US positions existed simultaneously. Iran's FM Araghchi said negotiating was 'impossible' with such contradictions.",
+          },
         },
         {
-          year: "May 11, 2025",
-          title: "Round 3 — Muscat",
+          year: { he: "11 במאי 2025", en: "May 11, 2025" },
+          title: {
+            he: "סיבוב 3 — מוסקט",
+            en: "Round 3 — Muscat",
+          },
           status: "failed",
-          desc: "Talks resumed in Muscat — the fourth round of the Omani channel (third substantive session). Both sides described the atmosphere as 'serious' but no framework emerged. Iran was still enriching at 60%; the US was still demanding dismantlement.",
-          why: "Talks continued without agreement. The 60-day deadline was now six weeks away.",
+          desc: {
+            he: "השיחות חודשו במוסקט — הסיבוב הרביעי של הערוץ העומאני. שני הצדדים תיארו את האווירה כ'רצינית' אך לא הגיעו למסגרת. איראן עדיין מעשירה ב-60%; ארה\"ב עדיין דורשת פירוק.",
+            en: "Talks resumed in Muscat — the fourth round of the Omani channel. Both sides described the atmosphere as 'serious' but no framework emerged. Iran was still enriching at 60%; the US was still demanding dismantlement.",
+          },
+          why: {
+            he: "שיחות ללא הסכם. המועד האחרון של 60 הימים היה רחוק שישה שבועות בלבד.",
+            en: "Talks continued without agreement. The 60-day deadline was now six weeks away.",
+          },
         },
         {
-          year: "Jun 12, 2025",
-          title: "Deadline Day — Trump: 'Today Is Day 61'",
+          year: { he: "12 ביוני 2025", en: "Jun 12, 2025" },
+          title: {
+            he: "יום המועד האחרון — טראמפ: 'היום יום 61'",
+            en: "Deadline Day — Trump: 'Today Is Day 61'",
+          },
           status: "failed",
-          desc: "Trump told CNN: 'I gave them 60 days, and today is day 61.' No deal had been reached. No further talks were scheduled. Israel had been requesting US coordination for a strike for weeks.",
-          why: "The deadline expired with zero agreement. Israel launched strikes the following morning.",
+          desc: {
+            he: "טראמפ אמר ל-CNN: 'נתתי להם 60 יום, והיום הוא יום 61.' לא הושג הסכם. לא נקבעו שיחות נוספות. ישראל ביקשה תיאום אמריקני לתקיפה במשך שבועות.",
+            en: "Trump told CNN: 'I gave them 60 days, and today is day 61.' No deal had been reached. No further talks were scheduled. Israel had been requesting US coordination for a strike for weeks.",
+          },
+          why: {
+            he: "המועד האחרון פג ללא הסכם. ישראל יצאה למתקפה בבוקר שלמחרת.",
+            en: "The deadline expired with zero agreement. Israel launched strikes the following morning.",
+          },
         },
         {
-          year: "Jun 13, 2025",
-          title: "Israel Launches the Twelve-Day War",
+          year: { he: "13 ביוני 2025", en: "Jun 13, 2025" },
+          title: {
+            he: "ישראל פותחת את 'מלחמת 12 הימים'",
+            en: "Israel Launches the Twelve-Day War",
+          },
           status: "strike",
-          desc: "~200 Israeli fighter jets struck 100+ targets across Iran in the opening salvo of what became the Twelve-Day War. Killed: IRGC commander Hossein Salami, armed forces chief of staff Mohammad Bagheri, and IRGC air force commander Hajizadeh. The Natanz Pilot Fuel Enrichment Plant was destroyed. Nuclear scientists, missile sites, and IRGC bases were also hit.",
-          why: "Iran launched retaliatory missile and drone barrages at Israel. The diplomatic track was suspended entirely.",
+          desc: {
+            he: "כ-200 מטוסי קרב ישראלים תקפו 100+ מטרות ברחבי איראן. הרוגים: מפקד משמרות המהפכה חוסיין סלאמי, ראש המטה הכללי מוחמד בקרי ומפקד חיל האוויר של המשמרות חג'יזאדה. מתקן ההעשרה נתנז נהרס. מדענים גרעיניים, אתרי טילים ובסיסי המשמרות נפגעו אף הם.",
+            en: "~200 Israeli fighter jets struck 100+ targets across Iran. Killed: IRGC commander Hossein Salami, armed forces chief of staff Mohammad Bagheri, and IRGC air force commander Hajizadeh. The Natanz Pilot Fuel Enrichment Plant was destroyed. Nuclear scientists, missile sites, and IRGC bases were also hit.",
+          },
+          why: {
+            he: "איראן יצאה במתקפות נגד בטילים ובמטוסים ללא טייס על ישראל. המסלול הדיפלומטי הושעה לחלוטין.",
+            en: "Iran launched retaliatory missile and drone barrages at Israel. The diplomatic track was suspended entirely.",
+          },
         },
         {
-          year: "Jun 21–22, 2025",
-          title: "Operation Midnight Hammer — US B-2 Strikes",
+          year: { he: "21–22 ביוני 2025", en: "Jun 21–22, 2025" },
+          title: {
+            he: "מבצע 'פטיש חצות' — הפצצות ה-B-2 של ארה\"ב",
+            en: "Operation Midnight Hammer — US B-2 Strikes",
+          },
           status: "strike",
-          desc: "Seven B-2 Spirit stealth bombers from the 509th Bomb Wing dropped 12–14 GBU-57A/B bunker-buster bombs on Fordow (underground), Natanz, and Isfahan nuclear sites. Trump called it 'a limited, one-off mission.' Iran had reportedly moved enriched uranium stockpiles before the strikes.",
-          why: "A DIA battle damage assessment (labeled 'low confidence, preliminary') concluded the strikes set back Iran's nuclear weapons capability by only 'a matter of months, not years.' Iran's underground Fordow facility was not fully destroyed.",
+          desc: {
+            he: "שבעה מפציצי B-2 Spirit מהגדוד ה-509 שחררו 12–14 פצצות קורות GBU-57A/B על אתרי הגרעין פורדו (תת-קרקעי), נתנז ואיספהאן. טראמפ כינה זאת 'משימה מוגבלת וחד-פעמית'. לפי הדיווחים, איראן הזיזה את מלאי האורניום המועשר לפני המתקפות.",
+            en: "Seven B-2 Spirit stealth bombers from the 509th Bomb Wing dropped 12–14 GBU-57A/B bunker-buster bombs on Fordow (underground), Natanz, and Isfahan nuclear sites. Trump called it 'a limited, one-off mission.' Iran had reportedly moved enriched uranium stockpiles before the strikes.",
+          },
+          why: {
+            he: "הערכת נזקי קרב של DIA (בדרגת אמינות 'נמוכה, ראשונית') קבעה שהמתקפות עיכבו את יכולת הנשק הגרעיני של איראן ב'חודשים בלבד, לא בשנים'. מתקן פורדו התת-קרקעי לא נהרס לחלוטין.",
+            en: "A DIA battle damage assessment (labeled 'low confidence, preliminary') concluded the strikes set back Iran's nuclear weapons capability by only 'a matter of months, not years.' Iran's underground Fordow facility was not fully destroyed.",
+          },
         },
         {
-          year: "Feb 26, 2026",
-          title: "Final Round — Geneva, Iran's Last Offer",
+          year: { he: "26 בפבר׳ 2026", en: "Feb 26, 2026" },
+          title: {
+            he: "הסיבוב האחרון — ז'נבה, ההצעה הסופית של איראן",
+            en: "Final Round — Geneva, Iran's Last Offer",
+          },
           status: "failed",
-          desc: "The final round of Omani-mediated talks, held in Geneva. Iran put its most detailed proposal on the table: enrich up to 20% U-235 using 30 cascades of advanced IR-6 centrifuges, justified by a 10-year reactor fuel plan; would not accumulate enriched gas; and offered to blend down its 60% stockpile. The US did not accept.",
-          why: "Strikes began 48 hours later. According to ACA analysis, US negotiators arrived 'ill-prepared for serious nuclear talks.'",
+          desc: {
+            he: "הסיבוב האחרון של שיחות בתיווך עומאני, שנערך בז'נבה. איראן הציגה את הצעתה המפורטת ביותר: העשרה עד 20% U-235 באמצעות 30 קסקדות של צנטריפוגות IR-6 מתקדמות; לא תצבור גז מועשר; ותדלל את מלאי ה-60% שלה. ארה\"ב לא קיבלה.",
+            en: "The final round of Omani-mediated talks, held in Geneva. Iran offered: enrich up to 20% U-235 using 30 cascades of advanced IR-6 centrifuges; would not accumulate enriched gas; would blend down its 60% stockpile. The US did not accept.",
+          },
+          why: {
+            he: "המתקפות החלו 48 שעות לאחר מכן. לפי ניתוח של ACA, המנהלים האמריקנים הגיעו לז'נבה 'לא מוכנים לשיחות גרעין רציניות'.",
+            en: "Strikes began 48 hours later. According to ACA analysis, US negotiators arrived 'ill-prepared for serious nuclear talks.'",
+          },
         },
         {
-          year: "Feb 28, 2026",
-          title:
-            "Operation Epic Fury + Operation Roaring Lion — Khamenei Killed",
+          year: { he: "28 בפבר׳ 2026", en: "Feb 28, 2026" },
+          title: {
+            he: "מבצע 'זעם אפי' + מבצע 'אריה שואג' — ח'אמנאי נהרג",
+            en: "Operation Epic Fury + Operation Roaring Lion — Khamenei Killed",
+          },
           status: "strike",
-          desc: "The US (Operation Epic Fury) and Israel (Operation Roaring Lion) launched a combined strike campaign — approximately 900 US strikes in the first 12 hours. Killed: Supreme Leader Ayatollah Ali Khamenei, IRGC commander Mohammad Pakpour, and Defense Minister Aziz Nasirzadeh. Numerous sites in Tehran and across Iran were bombed.",
-          why: "Iran retaliated with missiles and drones against Israel and 16 US military bases across Bahrain, Kuwait, Qatar, the UAE, and Saudi Arabia. On March 2, Iran struck Aramco's Ras Tanura refinery and Qatar's Ras Laffan LNG complex.",
+          desc: {
+            he: "ארה\"ב (מבצע Epic Fury) וישראל (מבצע Roaring Lion) יצאו במסע תקיפות משולב — כ-900 תקיפות אמריקניות ב-12 השעות הראשונות. הרוגים: המנהיג העליון האיית-אללה עלי ח'אמנאי, מפקד המשמרות מוחמד פקפור ושר הביטחון עזיז נסירזאדה. אתרים רבים בטהרן וברחבי איראן הופצצו.",
+            en: "The US (Operation Epic Fury) and Israel (Operation Roaring Lion) launched a combined strike campaign — ~900 US strikes in the first 12 hours. Killed: Supreme Leader Ayatollah Ali Khamenei, IRGC commander Mohammad Pakpour, and Defense Minister Aziz Nasirzadeh. Numerous sites in Tehran and across Iran were bombed.",
+          },
+          why: {
+            he: "איראן הגיבה בטילים ומטוסים ללא טייס על ישראל ועל 16 בסיסים צבאיים אמריקניים בבחריין, כווית, קטאר, האמירויות וערב הסעודית. ב-2 במרץ, איראן תקפה את בית הזיקוק ראס תנורה של ארמקו ומתחם ה-LNG ראס לפאן של קטאר.",
+            en: "Iran retaliated with missiles and drones against Israel and 16 US military bases across Bahrain, Kuwait, Qatar, the UAE, and Saudi Arabia. On March 2, Iran struck Aramco's Ras Tanura refinery and Qatar's Ras Laffan LNG complex.",
+          },
         },
         {
-          year: "Apr 11–12, 2026",
-          title: "Islamabad Talks — Pakistan-Brokered, Failed",
+          year: { he: "11–12 באפר׳ 2026", en: "Apr 11–12, 2026" },
+          title: {
+            he: "שיחות אסלאמאבאד — בתיווך פקיסטן, כשלו",
+            en: "Islamabad Talks — Pakistan-Brokered, Failed",
+          },
           status: "failed",
-          desc: "Pakistan brokered a final round of US-Iran talks in Islamabad. Both sides attended. Talks ended without agreement. Trump announced immediately after: he 'no longer cared about negotiations.'",
-          why: "Trump announced a naval blockade of Iran effective April 13, 2026 at 10 a.m. ET — the first US naval blockade since the Cuban Missile Crisis.",
+          desc: {
+            he: "פקיסטן תיווכה בסיבוב אחרון של שיחות ארה\"ב-איראן באסלאמאבאד. שני הצדדים השתתפו. השיחות הסתיימו ללא הסכם. טראמפ הודיע מיד אחריהן שהוא 'כבר לא מתעניין במשא ומתן'.",
+            en: "Pakistan brokered a final round of US-Iran talks in Islamabad. Both sides attended. Talks ended without agreement. Trump announced immediately after: he 'no longer cared about negotiations.'",
+          },
+          why: {
+            he: "טראמפ הכריז על מצור ימי על איראן, בתוקף מ-13 באפריל 2026 — המצור הימי האמריקני הראשון מאז משבר הטילים הקובני.",
+            en: "Trump announced a naval blockade of Iran effective April 13, 2026 — the first US naval blockade since the Cuban Missile Crisis.",
+          },
         },
         {
-          year: "Apr 13, 2026",
-          title: "US Naval Blockade of Iran — Ongoing",
+          year: { he: "13 באפר׳ 2026", en: "Apr 13, 2026" },
+          title: {
+            he: "המצור הימי האמריקני על איראן — בתהליך",
+            en: "US Naval Blockade of Iran — Ongoing",
+          },
           status: "ongoing",
-          desc: "The US Navy enforced a full blockade of Iranian ports and the Strait of Hormuz approaches. Iran's oil exports halted. The IAEA has been unable to conduct inspections of Iranian nuclear sites since the June 2025 war. Iran's post-strike nuclear program status remains unknown.",
-          why: "Status as of June 2026: blockade in effect. No diplomatic channel active. Iran's government and IRGC command structure in transition following Khamenei's killing.",
+          desc: {
+            he: "חיל הים האמריקני הטיל מצור מלא על נמלי איראן וגישות מצר הורמוז. יצוא הנפט של איראן נפסק. הסוכנות לאנרגיה אטומית לא הצליחה לבצע ביקורות גרעיניות באיראן מאז מלחמת יוני 2025. מצב התוכנית הגרעינית לאחר המתקפות נותר לא-ידוע.",
+            en: "The US Navy enforced a full blockade of Iranian ports and the Strait of Hormuz approaches. Iran's oil exports halted. The IAEA has been unable to conduct inspections of Iranian nuclear sites since the June 2025 war. Iran's post-strike nuclear program status remains unknown.",
+          },
+          why: {
+            he: "מצב נכון ליוני 2026: המצור בתוקף. אין ערוץ דיפלומטי פעיל. מבנה השלטון ומטה המשמרות באיראן במעבר לאחר הריגת ח'אמנאי.",
+            en: "Status as of June 2026: blockade in effect. No diplomatic channel active. Iran's government and IRGC command structure in transition following Khamenei's killing.",
+          },
         },
       ];
+
+      // ── state ─────────────────────────────────────────────────────
+      let lang = "he";
+      let activeFilter = "all";
+
+      function setLang(l) {
+        lang = l;
+        const html = document.documentElement;
+        html.lang = l;
+        html.dir = l === "he" ? "rtl" : "ltr";
+        document.title = T[l].title;
+        document.getElementById("langBtn").textContent = T[l].langBtn;
+        document.getElementById("hdr-title").textContent = T[l].title;
+        document.getElementById("hdr-sub").textContent = T[l].sub;
+        document.getElementById("lbl-total").textContent = T[l].stats.total;
+        document.getElementById("lbl-deals").textContent = T[l].stats.deals;
+        document.getElementById("lbl-failed").textContent = T[l].stats.failed;
+        document.getElementById("lbl-ongoing").textContent = T[l].stats.ongoing;
+        buildFilters();
+        render(activeFilter);
+      }
+
+      function buildFilters() {
+        const t = T[lang].filters;
+        const container = document.getElementById("filters");
+        container.innerHTML = "";
+        Object.entries(t).forEach(([key, label]) => {
+          const btn = document.createElement("button");
+          btn.className =
+            "filter-btn" + (key === activeFilter ? " active" : "");
+          btn.dataset.filter = key;
+          btn.textContent = label;
+          btn.addEventListener("click", () => {
+            activeFilter = key;
+            buildFilters();
+            render(key);
+          });
+          container.appendChild(btn);
+        });
+      }
 
       function render(filter) {
         const tl = document.getElementById("timeline");
         tl.innerHTML = "";
-
+        const lbl = T[lang].labels;
         let total = 0,
           deals = 0,
           failed = 0,
@@ -462,29 +754,19 @@
           else if (ev.status === "ongoing") ongoing++;
 
           const show = filter === "all" || filter === ev.status;
-
-          const labels = {
-            deal: "Deal Reached",
-            failed: "Fell Through",
-            partial: "Partial",
-            ongoing: "Ongoing",
-            strike: "Assassination / Strike",
-          };
-
           const div = document.createElement("div");
           div.className = "event" + (show ? "" : " hidden");
           div.innerHTML = `
-      <div class="event-date">${ev.year}</div>
-      <div class="dot-wrap"><div class="dot ${ev.status}"></div></div>
-      <div class="card">
-        <div class="card-top">
-          <div class="card-title" data-date="${ev.year}">${ev.title}</div>
-          <span class="badge ${ev.status}">${labels[ev.status]}</span>
-        </div>
-        <div class="card-desc">${ev.desc}</div>
-        <div class="card-why">${ev.why}</div>
-      </div>
-    `;
+            <div class="event-date">${ev.year[lang]}</div>
+            <div class="dot-wrap"><div class="dot ${ev.status}"></div></div>
+            <div class="card">
+              <div class="card-top">
+                <div class="card-title">${ev.title[lang]}</div>
+                <span class="badge ${ev.status}">${lbl[ev.status]}</span>
+              </div>
+              <div class="card-desc">${ev.desc[lang]}</div>
+              <div class="card-why">${ev.why[lang]}</div>
+            </div>`;
           tl.appendChild(div);
         });
 
@@ -494,17 +776,11 @@
         document.getElementById("cnt-ongoing").textContent = ongoing;
       }
 
-      document.querySelectorAll(".filter-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".filter-btn")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          render(btn.dataset.filter);
-        });
+      document.getElementById("langBtn").addEventListener("click", () => {
+        setLang(lang === "he" ? "en" : "he");
       });
 
-      render("all");
+      setLang("he");
     </script>
   </body>
 </html>
