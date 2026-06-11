@@ -263,6 +263,30 @@
         color: rgba(239, 68, 68, 0.85);
       }
 
+      /* ── iran counter ── */
+      .iran-counter {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 1rem 2.5rem;
+      }
+
+      .iran-counter-header {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .iran-flag-icon {
+        font-size: 2.8rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .iran-counter .quote-item {
+        border-inline-start-color: var(--red);
+      }
+
       /* ── timeline ── */
       .timeline {
         max-width: 860px;
@@ -504,6 +528,17 @@
       <div class="quote-list" id="quote-list"></div>
     </div>
 
+    <div class="iran-counter">
+      <div class="iran-counter-header">
+        <div class="iran-flag-icon">🇮🇷</div>
+        <div class="trump-counter-label">
+          <strong id="iran-lbl-title"></strong>
+          <span id="iran-lbl-sub"></span>
+        </div>
+      </div>
+      <div class="quote-list" id="iran-quote-list"></div>
+    </div>
+
     <div class="filters" id="filters"></div>
     <div class="timeline" id="timeline"></div>
 
@@ -518,6 +553,10 @@
           trumpSub:
             "CNN ספרה 37–38 הצהרות בין מאוחר מרץ ל-9 ביוני 2026 — 4 המתועדות ביותר מוצגות",
           quoteWhat: "מה קרה אחר כך",
+          iranTitle: "הצהרות המפתח של איראן",
+          iranSub:
+            "מאופטימיות ועד קווים אדומים — כיצד איראן עיצבה ושברה את מהלך המשא ומתן",
+          iranQuoteWho: "מי אמר",
           stats: {
             total: "ניסיונות",
             deals: "הסכמים נחתמו",
@@ -546,6 +585,10 @@
           trumpSub:
             "CNN counted 37–38 claims between late March and June 9, 2026 — 4 most documented shown below",
           quoteWhat: "What happened next",
+          iranTitle: "Iran's Key Declarations",
+          iranSub:
+            "From optimism to red lines — how Iran shaped and broke the negotiation track",
+          iranQuoteWho: "Who said it",
           stats: {
             total: "Close Calls",
             deals: "Deals Signed",
@@ -860,6 +903,101 @@
         },
       ];
 
+      const iranQuotes = [
+        {
+          date: { he: "25 בפבר׳ 2026", en: "Feb 25, 2026" },
+          speaker: {
+            he: "עבאס עראקצ'י — שר החוץ האיראני",
+            en: "Abbas Araghchi — Iranian Foreign Minister",
+          },
+          venue: {
+            he: "פוסט ב-X לפני סיבוב ג'נבה",
+            en: "Post on X ahead of Geneva round",
+          },
+          quote: {
+            en: '"We have a historic opportunity to strike an unprecedented agreement. A fair, balanced and equitable deal is achievable. Tomorrow in Geneva, there is every possibility to come to an agreed solution."',
+            he: '"יש לנו הזדמנות היסטורית להגיע להסכם חסר תקדים. עסקה הוגנת ומאוזנת ניתנת להשגה. מחר בג\'נבה קיימת כל אפשרות להגיע לפתרון מוסכם."',
+          },
+          outcome: {
+            en: "Geneva talks held Feb 26. The US launched airstrikes on Iran two days later, Feb 28, 2026. Araghchi accused the US of sabotaging talks at the moment of greatest progress.",
+            he: "שיחות ג'נבה התקיימו ב-26 בפברואר. ארה\"ב יצאה לתקיפות אוויריות נגד איראן יומיים לאחר מכן, 28 בפברואר 2026. עראקצ'י האשים את ארה\"ב בחבלה בשיחות ברגע ההתקדמות הגדולה ביותר.",
+          },
+        },
+        {
+          date: { he: "12 באפר׳ 2026", en: "Apr 12, 2026" },
+          speaker: {
+            he: "עבאס עראקצ'י — שר החוץ האיראני",
+            en: "Abbas Araghchi — Iranian Foreign Minister",
+          },
+          venue: {
+            he: "פוסט ב-X לאחר קריסת שיחות איסלאמאבאד",
+            en: "Post on X after Islamabad talks collapse",
+          },
+          quote: {
+            en: "\"In intensive talks at the highest level in 47 years, Iran engaged in good faith. But when just inches away from an 'Islamabad MoU,' we encountered maximalism, shifting goalposts, and blockade.\"",
+            he: "\"בשיחות אינטנסיביות ברמה הגבוהה ביותר ב-47 שנה, איראן פעלה בתום לב. אך כשהיינו ממש על סף 'מזכר איסלאמאבאד', נתקלנו במקסימליזם, בזניחת יעדים ובמצור.\"",
+          },
+          outcome: {
+            en: "Trump threatened resumed military strikes. VP Vance confirmed Iran wouldn't accept US terms. Ceasefire extended 'indefinitely' on Apr 21 with no deal framework.",
+            he: "טראמפ איים בחידוש המתקפות הצבאיות. סגן הנשיא ואנס אישר שאיראן לא קיבלה את תנאי ארה\"ב. הפסקת האש הוארכה 'ללא הגבלת זמן' ב-21 באפריל, ללא מסגרת הסכם.",
+          },
+        },
+        {
+          date: { he: "18 באפר׳ 2026", en: "Apr 18, 2026" },
+          speaker: {
+            he: "אסמאעיל בע'אאי — דובר משרד החוץ האיראני",
+            en: "Esmaeil Baghaei — Iranian FM Spokesman",
+          },
+          venue: {
+            he: "טלוויזיה ממלכתית IRIB",
+            en: "State-run IRIB television",
+          },
+          quote: {
+            en: '"Iran will not transfer its enriched uranium to a foreign country, and sending it to the United States has never been under consideration."',
+            he: '"איראן לא תעביר את האורניום המועשר שלה למדינה זרה, ושליחתו לארצות הברית מעולם לא עמדה על הפרק."',
+          },
+          outcome: {
+            en: "Directly contradicted Trump's Apr 17 claim that Iran had 'agreed to everything.' Warned of countermeasures against the US naval blockade. Talks stalled through April.",
+            he: "סתר ישירות את טענת טראמפ מ-17 באפריל שאיראן 'הסכימה לכל דבר'. הזהיר מנגדי-נגד נגד המצור הימי האמריקני. השיחות קפאו לאורך כל אפריל.",
+          },
+        },
+        {
+          date: { he: "2 במאי 2026", en: "May 2, 2026" },
+          speaker: {
+            he: "ממשלת איראן — דרך תיווך פקיסטן",
+            en: "Iranian Government — via Pakistan mediation",
+          },
+          venue: {
+            he: "הצעת 14 הסעיפים הרשמית",
+            en: "Official 14-point proposal",
+          },
+          quote: {
+            en: "Iran's 14-point proposal: guarantees against future military aggression; US withdrawal from Iran's periphery; end naval blockade; release frozen assets; war reparations; lift all sanctions; end fighting in Lebanon. Enrichment rights are non-negotiable.",
+            he: 'הצעת 14 הסעיפים של איראן: ערבויות נגד תוקפנות צבאית עתידית; נסיגת ארה"ב מסביבת איראן; סיום המצור הימי; שחרור נכסים קפואים; פיצויי מלחמה; ביטול כל הסנקציות; סיום הלחימה בלבנון. זכויות ההעשרה אינן ניתנות למשא ומתן.',
+          },
+          outcome: {
+            en: "Trump called it 'totally unacceptable' on May 11. The US declared the ceasefire 'on life support.' Iran's chief negotiator Ghalibaf issued a formal ultimatum: accept or face 'failure after failure.'",
+            he: "טראמפ כינה אותה 'בלתי מקובלת לחלוטין' ב-11 במאי. ארה\"ב הכריזה שהפסקת האש 'על סף קריסה'. ראש המשלחת האיראנית ע'ליבאף הוציא אולטימטום רשמי: קבל או שתיתקל ב'כישלון אחר כישלון'.",
+          },
+        },
+        {
+          date: { he: "1 ביוני 2026", en: "Jun 1, 2026" },
+          speaker: {
+            he: "צוות המשא ומתן האיראני (סוכנות תסנים)",
+            en: "Iranian Negotiating Team (via Tasnim News Agency)",
+          },
+          venue: { he: "הצהרה רשמית", en: "Official statement" },
+          quote: {
+            en: '"Considering that Lebanon was one of the preconditions for the ceasefire and that this ceasefire has now been violated on all fronts, including Lebanon, the Iranian negotiating team is suspending dialogues and exchange of texts through mediators."',
+            he: '"בהתחשב בכך שלבנון הייתה אחד מתנאי הבסיס להפסקת האש ושהפסקת האש הופרה כעת בכל החזיתות, לרבות לבנון, צוות המשא ומתן האיראני מעכב את הדיאלוגים ואת חילופי הטקסטים דרך המתווכים."',
+          },
+          outcome: {
+            en: "Iran simultaneously threatened full closure of the Strait of Hormuz and activation of 'other fronts.' Eight days later, Iran downed a US Apache helicopter, triggering US CENTCOM strikes on Jun 9.",
+            he: "איראן איימה בו-זמנית על סגירה מלאה של מצר הורמוז והפעלת 'חזיתות אחרות'. שמונה ימים לאחר מכן הפילה איראן מסוק Apache אמריקני, מה שהוביל לתקיפות US CENTCOM ב-9 ביוני.",
+          },
+        },
+      ];
+
       function renderTrumpCounter() {
         const t = T[lang];
         document.getElementById("trump-cnt").textContent = TRUMP_TOTAL + "+";
@@ -899,6 +1037,25 @@
         buildFilters();
         render(activeFilter);
         renderTrumpCounter();
+        renderIranCounter();
+      }
+
+      function renderIranCounter() {
+        const t = T[lang];
+        document.getElementById("iran-lbl-title").textContent = t.iranTitle;
+        document.getElementById("iran-lbl-sub").textContent = t.iranSub;
+
+        const list = document.getElementById("iran-quote-list");
+        list.innerHTML = "";
+        iranQuotes.forEach((q) => {
+          const div = document.createElement("div");
+          div.className = "quote-item";
+          div.innerHTML = `
+            <div class="quote-meta">${q.date[lang]} &nbsp;·&nbsp; ${q.speaker[lang]}</div>
+            <div class="quote-text">${q.quote[lang]}</div>
+            <div class="quote-outcome">↳ ${q.outcome[lang]}</div>`;
+          list.appendChild(div);
+        });
       }
 
       function buildFilters() {
